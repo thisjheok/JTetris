@@ -1,0 +1,84 @@
+﻿  Installing vcpkg dependencies to C:\Users\jhjan\source\repos\Jetris\vcpkg_installed\x64-windows\
+  "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\vcpkg.exe" install  --x-wait-for-lock --triplet "x64-windows" --vcpkg-root "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\vcpkg\\" "--x-manifest-root=C:\Users\jhjan\source\repos\Jetris\\" "--x-install-root=C:\Users\jhjan\source\repos\Jetris\vcpkg_installed\x64-windows\\" 
+  https://github.com/microsoft/vcpkg(HEAD)에서 레지스트리 정보를 가져오는 중...
+  삼중항 x64-windows에 대한 컴파일러 해시 감지 중...
+  컴파일러 찾음: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
+  빌드 및 설치할 패키지:
+    * cgltf:x64-windows@1.14 -- git+https://github.com/microsoft/vcpkg@9e21f85900222031c3343b9f2c69b48e32a37782
+    * dirent:x64-windows@1.26 -- git+https://github.com/microsoft/vcpkg@94a013e2da65dc9d6eefdc9b163122e49a41645e
+    * drlibs:x64-windows@2025-09-10 -- git+https://github.com/microsoft/vcpkg@6d16767f966ad9a89573a53ccc87e8bc352420cd
+    * glfw3:x64-windows@3.4#1 -- git+https://github.com/microsoft/vcpkg@d4bbd4f27c2ca619f57778985120cddcedadb1cc
+    * miniaudio:x64-windows@0.11.23 -- git+https://github.com/microsoft/vcpkg@a61df2a6c638fea68c6ad25c979bac76c33b29af
+    * mmx:x64-windows@2025-03-19 -- git+https://github.com/microsoft/vcpkg@3ea76735f35eb04d830db32fd21b00f9316bdbdc
+    * nanosvg:x64-windows@2023-12-29 -- git+https://github.com/microsoft/vcpkg@6fbdab7bdd32d0755336f499d49f9a0f31e8fb36
+    * qoi:x64-windows@2023-08-10 -- git+https://github.com/microsoft/vcpkg@2501f06dad0450b48676652e4f8b053071f874fb
+      raylib[audio,core]:x64-windows@5.5#1 -- git+https://github.com/microsoft/vcpkg@e0d1117e1778220a4a156f56056f9e3cf3d28028
+    * stb:x64-windows@2024-07-29#1 -- git+https://github.com/microsoft/vcpkg@c362152d1d02973e7b1ce777960f8a6876656560
+    * vcpkg-cmake:x64-windows@2024-04-23 -- git+https://github.com/microsoft/vcpkg@e74aa1e8f93278a8e71372f1fa08c3df420eb840
+    * vcpkg-cmake-config:x64-windows@2024-05-23 -- git+https://github.com/microsoft/vcpkg@97a63e4bc1a17422ffe4eff71da53b4b561a7841
+  이 작업을 완료하기 위해 추가 패키지(*)가 수정됩니다.
+  157 ms 후 C:\Users\jhjan\AppData\Local\vcpkg\archives의 패키지 12개를 복원했습니다. 자세한 내용을 보려면 --debug를 사용하세요.
+  1/12 vcpkg-cmake-config:x64-windows@2024-05-23을(를) 설치하는 중...
+  vcpkg-cmake-config:x64-windows 처리 경과 시간: 21.9 ms
+  vcpkg-cmake-config:x64-windows 패키지 ABI: 74887bcd3d95de8ccc0cb3c1b6cce2950b8d236a609664d697a005c8675dc974
+  2/12 vcpkg-cmake:x64-windows@2024-04-23을(를) 설치하는 중...
+  vcpkg-cmake:x64-windows 처리 경과 시간: 21.2 ms
+  vcpkg-cmake:x64-windows 패키지 ABI: fd209bf8e6a245fc79104729e98df6b601555c752c59bd2ce0942955b2d187cd
+  3/12 stb:x64-windows@2024-07-29#1을(를) 설치하는 중...
+  stb:x64-windows 처리 경과 시간: 31.5 ms
+  stb:x64-windows 패키지 ABI: 2be87981dc8b9e7a469eabec195d6cff8e75e95834bf14d6235af57a94956887
+  4/12 qoi:x64-windows@2023-08-10을(를) 설치하는 중...
+  qoi:x64-windows 처리 경과 시간: 149 ms
+  qoi:x64-windows 패키지 ABI: 4cbe8b54d00978c5a8fffefd30240757c6c57ac71ed149f96b6b7b147cc67c89
+  5/12 nanosvg:x64-windows@2023-12-29을(를) 설치하는 중...
+  nanosvg:x64-windows 처리 경과 시간: 42.9 ms
+  nanosvg:x64-windows 패키지 ABI: 0e16eab812b4ed152fd08d08b27e37cd8cca26d67e6ec6823069ed48162c6a9d
+  6/12 mmx:x64-windows@2025-03-19을(를) 설치하는 중...
+  mmx:x64-windows 처리 경과 시간: 165 ms
+  mmx:x64-windows 패키지 ABI: 38f3449d3e6b1736d795ddacfdee336f9ff4a335f55ed5655f16d252e3cc9e06
+  7/12 glfw3:x64-windows@3.4#1을(를) 설치하는 중...
+  glfw3:x64-windows 처리 경과 시간: 45.9 ms
+  glfw3:x64-windows 패키지 ABI: 872473a5535648fcc285d29837b3bfa7137f532835215bba959476cd3d026902
+  8/12 dirent:x64-windows@1.26을(를) 설치하는 중...
+  dirent:x64-windows 처리 경과 시간: 26.4 ms
+  dirent:x64-windows 패키지 ABI: a817f139db51ce3e6e5b65a5b135cb14caa801869666f21dbde229acab073685
+  9/12 cgltf:x64-windows@1.14을(를) 설치하는 중...
+  cgltf:x64-windows 처리 경과 시간: 32.5 ms
+  cgltf:x64-windows 패키지 ABI: 448d17e9dd2282e1cd7671c2441e68054cd9ea5e4cec24a2537ce77e8cbb6c6f
+  10/12 miniaudio:x64-windows@0.11.23을(를) 설치하는 중...
+  miniaudio:x64-windows 처리 경과 시간: 39.1 ms
+  miniaudio:x64-windows 패키지 ABI: 75f5b834a5d91d075fb48217ef4e4e2074e88ff58b26fa78f852fde24f1cbce4
+  11/12 drlibs:x64-windows@2025-09-10을(를) 설치하는 중...
+  drlibs:x64-windows 처리 경과 시간: 35.9 ms
+  drlibs:x64-windows 패키지 ABI: 26f711da11a9a42be0ce83e9d3ffaebacce6fae8f6975aff84f3da5573e566ae
+  12/12 raylib[audio,core]:x64-windows@5.5#1을(를) 설치하는 중...
+  raylib:x64-windows 처리 경과 시간: 25 ms
+  raylib:x64-windows 패키지 ABI: daf3852c48fb0d545f8738ae0894b9c83d57f153dcdb2a9f7cf64f033cb0ec2f
+  설치된 콘텐츠에 대한 라이선스는 소유자가 부여합니다. Microsoft는 타사 패키지에 대해 책임을 지지 않으며 라이선스를 부여하지도 않습니다.
+  일부 패키지에서 SPDX 라이선스를 선언하지 않았습니다. 각 패키지의 'copyright' 파일을 확인하여 라이선스에 대한 자세한 정보를 확인하세요.
+  이 vcpkg 설치에 설치된 패키지는 다음 라이선스를 선언합니다.
+  (MIT OR CC-PDDC)
+  (Unlicense OR MIT-0)
+  MIT
+  Zlib
+  raylib은 CMake 대상을 제공합니다.
+  
+    # 이 값은 추론적으로 생성되며 올바르지 않을 수 있습니다.
+    find_package(raylib CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE raylib)
+  
+  raylib은(는) pkg-config 모듈을 제공합니다.
+  
+    # A simple and easy-to-use library to enjoy videogames programming
+    raylib
+  
+  요청된 모든 설치를 완료했습니다(648 ms).
+  Block.cpp
+  Block.h
+  Board.cpp
+  Main.cpp
+  코드를 생성하고 있습니다...
+x64\Debug\Block.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
+  Jetris.vcxproj -> C:\Users\jhjan\source\repos\Jetris\x64\Debug\Jetris.exe
+  'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+  배치 파일이 아닙니다.
