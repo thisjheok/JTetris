@@ -30,5 +30,7 @@ struct Block
 	// 여기 explicit이 왜 들어간거지?
 	explicit Block(BlockType type);
 	static std::array<BlockType,7> createBlockBag();
+
+	static std::array<std::array<char, cols>, rows> rotateCells(Cells cells);
 };
 

@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <random>
+#include <vector>
 
 #include "Block.h"
 
@@ -20,9 +21,9 @@ Block::Block(BlockType blockType)
 	
 	case BlockType::O:
 		cells_ = { {
-			{{0,1,1,0}},
-			{{0,1,1,0}},
 			{{0,0,0,0}},
+			{{0,1,1,0}},
+			{{0,1,1,0}},
 			{{0,0,0,0}}
 		} };
 		break;
@@ -87,4 +88,20 @@ std::array<BlockType, 7> Block::createBlockBag()
 	std::shuffle(bag.begin(), bag.end(), generator);
 
 	return bag;
+}
+
+std::array<std::array<char, Block::cols>, Block::rows> Block::rotateCells(Block::Cells old_cells_)
+{
+	Block::Cells new_cells_{};
+
+	for (int row = 0; row < Block::rows; row++)
+	{
+		for (int col = 0; col < Block::cols; col++)
+		{
+			// 2차원 행렬 90도 회전 변환
+			new_cells_[col][Block::rows - 1 - row] = old_cells_[row][col];
+		}
+	}
+
+	return new_cells_;
 }
