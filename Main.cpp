@@ -14,8 +14,10 @@ int main() {
 	SetTargetFPS(60);
 
 	float falltimer = 0.0f;
-	constexpr float fallInterval = 0.5f;
-	
+
+	constexpr float normalFallInterval = 0.5f;
+	constexpr float softDropInterval = 0.05f;
+
 	Board board;
 	
 	bool gameOver = false;
@@ -45,12 +47,16 @@ int main() {
 				board.rotateCells(block);
 			}
 
+			const float currentFallInterval =
+				IsKeyDown(KEY_DOWN)
+				? softDropInterval
+				: normalFallInterval;
 
 			falltimer += GetFrameTime();
 
-			if (falltimer >= fallInterval)
+			if (falltimer >= currentFallInterval)
 			{
-				falltimer = 0.0f;
+				falltimer = 0.0f;	
 				if (bagCnt == 7) {
 					blockBag = Block::createBlockBag();
 					bagCnt = 0;
