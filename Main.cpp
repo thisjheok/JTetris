@@ -42,7 +42,7 @@ int main() {
 
 			if (IsKeyPressed(KEY_UP))
 			{
-				block.cells_ = block.rotateCells(block.cells_);
+				board.rotateCells(block);
 			}
 
 

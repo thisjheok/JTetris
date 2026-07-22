@@ -100,3 +100,42 @@ void Board::downRows(int clear_row)
 		cells_[0][col] = 0;
 	}
 }
+
+void Board::rotateCells(Block& block)
+{
+	Block rotatedBlock = block;
+
+	for (int row = 0; row < Block::rows; row++)
+	{
+		for (int col = 0; col < Block::cols; col++)
+		{
+			rotatedBlock.cells_[col][Block::rows - 1 - row] 
+				= block.cells_[row][col];
+		}
+	}
+	if (canPlace(rotatedBlock, block.x, block.y))
+	{
+		block.cells_ = rotatedBlock.cells_;
+	}
+
+	// 현재 위치와 주변 위치를 차례대로 시험
+	constexpr int kickOffsets[] = {
+		0,   // 이동 없이 회전
+		-1,  // 왼쪽 한 칸
+		1,   // 오른쪽 한 칸
+		-2,  // 왼쪽 두 칸
+		2    // 오른쪽 두 칸
+	};
+
+	for (int offsetX : kickOffsets)
+	{
+		const int newX = block.x + offsetX;
+
+		if (canPlace(rotatedBlock, newX, block.y))
+		{
+			block.cells_ = rotatedBlock.cells_;
+			block.x = newX;
+			return;
+		}
+	}
+}
