@@ -138,9 +138,8 @@ int main() {
 					}
 				}
 			}
-			Renderer::drawGame(board, block, gameOver);
 		}
+		Renderer::drawGame(board, block, gameOver);
 	}
-
 	CloseWindow();
 }
