@@ -38,6 +38,7 @@ int main() {
 	BlockBag blockBag = Block::createBlockBag();
 	std::size_t bagIndex = 0;
 	Block block = createNextBlock(blockBag, bagIndex);
+	Block nextBlock = createNextBlock(blockBag, bagIndex);
 
 	float falltimer = 0.0f;
 	float moveTimer = 0.0f;
@@ -107,7 +108,8 @@ int main() {
 				}
 				board.placeBlock(block, block.x, block.y);
 
-				block = createNextBlock(blockBag, bagIndex);
+				block = nextBlock;
+				nextBlock = createNextBlock(blockBag, bagIndex);
 
 				if (!board.canPlace(block, block.x, block.y))
 				{
@@ -133,7 +135,8 @@ int main() {
 				else
 				{
 					board.placeBlock(block, block.x, block.y);
-					block = createNextBlock(blockBag, bagIndex);
+					block = nextBlock;
+					nextBlock = createNextBlock(blockBag, bagIndex);
 
 					// 생성 위치에 놓을 수 없다면 게임 오버
 					if (!board.canPlace(block, block.x, block.y))
@@ -144,7 +147,7 @@ int main() {
 			}
 		}
 		int currentScore = board.getScore();
-		Renderer::drawGame(currentScore, board, block, gameOver);
+		Renderer::drawGame(currentScore, board, block, gameOver, nextBlock);
 	}
 	CloseWindow();
 }

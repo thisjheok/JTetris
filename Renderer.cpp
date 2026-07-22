@@ -1,5 +1,6 @@
 #include "Renderer.h"
 
+#include <algorithm>
 #include <raylib.h>
 
 namespace
@@ -58,6 +59,68 @@ namespace
             DARKGRAY
         );
     }
+
+    void drawPreviewBlock(const Block& block, int centerX, int centerY)
+    {
+        int minRow = static_cast<int>(Block::rows);
+        int maxRow = -1;
+        int minCol = static_cast<int>(Block::cols);
+        int maxCol = -1;
+
+        // 실제 블록이 차지하는 범위 계산
+        for (int row = 0; row < static_cast<int>(Block::rows); row++)
+        {
+            for (int col = 0; col < static_cast<int>(Block::cols); col++)
+            {
+                if (block.cells_[row][col] == 0)
+                    continue;
+
+                minRow = std::min(minRow, row);
+                maxRow = std::max(maxRow, row);
+                minCol = std::min(minCol, col);
+                maxCol = std::max(maxCol, col);
+            }
+        }
+
+        if (maxRow == -1 || maxCol == -1)
+            return;
+
+        const int blockWidth = (maxCol - minCol + 1) * cellSize;
+        const int blockHeight = (maxRow - minRow + 1) * cellSize;
+
+        const int startX = centerX - blockWidth / 2;
+        const int startY = centerY - blockHeight / 2;
+
+        const Color color = getBlockColor(block.type);
+
+        for (int row = minRow; row <= maxRow; row++)
+        {
+            for (int col = minCol; col <= maxCol; col++)
+            {
+                if (block.cells_[row][col] == 0)
+                    continue;
+
+                const int screenX = startX + (col - minCol) * cellSize;
+                const int screenY = startY + (row - minRow) * cellSize;
+
+                DrawRectangle(
+                    screenX + 1,
+                    screenY + 1,
+                    cellSize - 2,
+                    cellSize - 2,
+                    color
+                );
+
+                DrawRectangleLines(
+                    screenX,
+                    screenY,
+                    cellSize,
+                    cellSize,
+                    DARKGRAY
+                );
+            }
+        }
+    }
 }
 
 void Renderer::drawBoard(const Board& board) 
@@ -111,7 +174,7 @@ void Renderer::drawBlock(const Block& block)
     }
 }
 
-void Renderer::drawGame(int score,const Board& board, const Block& block, bool gameOver)
+void Renderer::drawGame(int score,const Board& board, const Block& block, bool gameOver, const Block& nextBlock)
 {
     constexpr int centerX = 500;
     constexpr int fontSize = 24;
@@ -129,9 +192,15 @@ void Renderer::drawGame(int score,const Board& board, const Block& block, bool g
     drawBlock(block);
 
     drawCenteredText("JETRIS", centerX, 50, 32, SKYBLUE);
+
     drawCenteredText("SCORE", centerX, 100, fontSize, WHITE);
     drawCenteredText(TextFormat("%d", score), centerX, 150, fontSize, WHITE);
+
     drawCenteredText("NEXT", centerX, 200, fontSize, WHITE);
+    Block previewBlock = nextBlock;
+    previewBlock.x = 11; // 보드 칸 기준 좌표
+    previewBlock.y = 6;
+    drawPreviewBlock(previewBlock, centerX, 280);
 
     if (gameOver)
     {
