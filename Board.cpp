@@ -54,6 +54,7 @@ void Board::placeBlock(const Block& block, int x, int y)
 			boardRow < static_cast<int>(Board::rows))
 		{
 			clearRow(boardRow);
+			downRows(boardRow);
 	    }
 	}
 }
@@ -81,5 +82,21 @@ void Board::clearRow(int row)
 	for (int col = 0; col < static_cast<int>(Board::cols); col++)
 	{
 		cells_[row][col] = 0;
+	}
+}
+
+void Board::downRows(int clear_row)
+{
+	for (int row = clear_row; row > 0; row--)
+	{
+		for (int col = 0; col < static_cast<int>(Board::cols); col++)
+		{
+			int prev_row = row - 1;
+			cells_[row][col] = cells_[prev_row][col];
+		}
+	}
+	for (int col = 0; col < static_cast<int>(Board::cols); col++)
+	{
+		cells_[0][col] = 0;
 	}
 }
