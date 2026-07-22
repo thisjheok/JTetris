@@ -1,32 +1,49 @@
-#include <iostream>
-#include <chrono>
-#include <thread>
-#include <random>
+#include <array>
+#include <string>
+#include <cstddef>
 #include <raylib.h>
 
 #include "Board.h"
 #include "Block.h"
 #include "Renderer.h"
 
+constexpr int screenWidth = 600;
+constexpr int screenHeight = 800;
+constexpr int targetFps = 60;
+
+constexpr float moveInterval = 0.1f;
+constexpr float normalFallInterval = 0.5f;
+constexpr float softDropInterval = 0.05f;
+
+using BlockBag = std::array<BlockType, 7>;
+
+namespace {
+	Block createNextBlock(BlockBag& bag, std::size_t& bagIndex)
+	{
+		if (bagIndex >= bag.size())
+		{
+			bag = Block::createBlockBag();
+			bagIndex = 0;
+		}
+
+		return Block{ bag[bagIndex++] };
+	}
+}
+
 int main() {
 
-	InitWindow(600, 800, "Jetris");
-	SetTargetFPS(60);
+	InitWindow(screenWidth, screenHeight, "Jetris");
+	SetTargetFPS(targetFps);
+
+	BlockBag blockBag = Block::createBlockBag();
+	std::size_t bagIndex = 0;
+	Block block = createNextBlock(blockBag, bagIndex);
 
 	float falltimer = 0.0f;
 	float moveTimer = 0.0f;
-
-	constexpr float moveInterval = 0.1f;
-	constexpr float normalFallInterval = 0.5f;
-	constexpr float softDropInterval = 0.05f;
-
-	Board board;
-	
 	bool gameOver = false;
 
-	int bagCnt = 0;
-	std::array<BlockType, 7> blockBag = Block::createBlockBag();
-	Block block{ blockBag[bagCnt++]};
+	Board board;
 
 	while (!WindowShouldClose())
 	{
@@ -90,18 +107,12 @@ int main() {
 				}
 				board.placeBlock(block, block.x, block.y);
 
-				if (bagCnt == 7) {
-					blockBag = Block::createBlockBag();
-					bagCnt = 0;
-				}
-
-				block = Block{ blockBag[bagCnt++] };
+				block = createNextBlock(blockBag, bagIndex);
 
 				if (!board.canPlace(block, block.x, block.y))
 				{
 					gameOver = true;
 				}
-
 				falltimer = 0.0f;
 			}
 
@@ -115,10 +126,6 @@ int main() {
 			if (falltimer >= currentFallInterval)
 			{
 				falltimer = 0.0f;	
-				if (bagCnt == 7) {
-					blockBag = Block::createBlockBag();
-					bagCnt = 0;
-				}
 				if (board.canPlace(block, block.x, block.y + 1))
 				{
 					block.y++;
@@ -126,10 +133,7 @@ int main() {
 				else
 				{
 					board.placeBlock(block, block.x, block.y);
-					
-					BlockType nextBlock = blockBag[bagCnt];
-					block = Block{ nextBlock };
-					bagCnt++;
+					block = createNextBlock(blockBag, bagIndex);
 
 					// 생성 위치에 놓을 수 없다면 게임 오버
 					if (!board.canPlace(block, block.x, block.y))
@@ -139,7 +143,8 @@ int main() {
 				}
 			}
 		}
-		Renderer::drawGame(board, block, gameOver);
+		int currentScore = board.getScore();
+		Renderer::drawGame(currentScore, board, block, gameOver);
 	}
 	CloseWindow();
 }

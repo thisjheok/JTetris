@@ -111,8 +111,16 @@ void Renderer::drawBlock(const Block& block)
     }
 }
 
-void Renderer::drawGame(const Board& board, const Block& block, bool gameOver)
+void Renderer::drawGame(int score,const Board& board, const Block& block, bool gameOver)
 {
+    constexpr int centerX = 500;
+    constexpr int fontSize = 24;
+
+    auto drawCenteredText = [](const char* text, int centerX, int y, int fontSize, Color color)
+        {
+            const int textWidth = MeasureText(text, fontSize);
+            DrawText(text, centerX - textWidth / 2, y, fontSize, color);
+        };
     BeginDrawing();
 
     ClearBackground(BLACK);
@@ -120,7 +128,10 @@ void Renderer::drawGame(const Board& board, const Block& block, bool gameOver)
     drawBoard(board);
     drawBlock(block);
 
-    DrawText("JETRIS", 430, 50, 32, WHITE);
+    drawCenteredText("JETRIS", centerX, 50, 32, SKYBLUE);
+    drawCenteredText("SCORE", centerX, 100, fontSize, WHITE);
+    drawCenteredText(TextFormat("%d", score), centerX, 150, fontSize, WHITE);
+    drawCenteredText("NEXT", centerX, 200, fontSize, WHITE);
 
     if (gameOver)
     {

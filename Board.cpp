@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "Block.h"
+#include "Score.h"
 
 bool Board::canPlace(const Block& block, int x, int y)
 {
@@ -40,7 +41,7 @@ void Board::placeBlock(const Block& block, int x, int y)
 		{
 			if (block.cells_[row][col] != 0)
 			{
-				// 전부다 0인 행은 실행되지 않는다. 
+				// 블록의 전부다 0인 행은 실행되지 않는다. 
 				cells_[row + y][col + x] = block.cells_[row][col];
 				hasCell = true;
 			}
@@ -53,8 +54,12 @@ void Board::placeBlock(const Block& block, int x, int y)
 			isLineFull(boardRow) &&
 			boardRow < static_cast<int>(Board::rows))
 		{
+			// 한줄 다 채우면 제거하기
 			clearRow(boardRow);
+			// 윗 블록들이 내려오기 
 			downRows(boardRow);
+			// TODO: 점수 증가 
+			score.increaseScore(1000);
 	    }
 	}
 }
@@ -138,4 +143,8 @@ void Board::rotateCells(Block& block)
 			return;
 		}
 	}
+}
+
+int Board::getScore() const{
+	return score.getScore();
 }

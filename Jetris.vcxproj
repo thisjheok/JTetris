@@ -127,10 +127,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClInclude Include="Block.h" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClInclude Include="Score.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />

@@ -7,5 +7,5 @@
 namespace Renderer {
 	void drawBoard(const Board& board);
 	void drawBlock(const Block& block);
-	void drawGame(const Board& board, const Block& block, bool gameOver);
+	void drawGame(int score,const Board& board, const Block& block, bool gameOver);
 }

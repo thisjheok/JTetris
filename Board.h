@@ -3,6 +3,7 @@
 #include <array>
 #include <cstddef>
 #include "Block.h"
+#include "Score.h"
 
 class Board
 {
@@ -19,6 +20,9 @@ public:
 	bool isLineFull(int row) const;
 	bool canPlace(const Block& block, int x, int y);
 
+	int getScore() const;
+
 private:
 	std::array<std::array<char, cols>, rows> cells_{};
+	Score score;
 };

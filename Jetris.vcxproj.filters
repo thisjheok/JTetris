@@ -27,6 +27,9 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -36,6 +39,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Block.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
