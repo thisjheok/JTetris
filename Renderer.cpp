@@ -76,7 +76,7 @@ void Renderer::drawBoard(const Board& board)
                     screenY + 1,
                     cellSize - 2,
                     cellSize - 2,
-                    BLUE
+                    GRAY
                 );
             }
 

@@ -14,7 +14,9 @@ int main() {
 	SetTargetFPS(60);
 
 	float falltimer = 0.0f;
+	float moveTimer = 0.0f;
 
+	constexpr float moveInterval = 0.1f;
 	constexpr float normalFallInterval = 0.5f;
 	constexpr float softDropInterval = 0.05f;
 
@@ -30,21 +32,77 @@ int main() {
 	{
 		if (!gameOver) 
 		{
-			if (IsKeyPressed(KEY_LEFT) &&
-				board.canPlace(block, block.x - 1, block.y))
+			int movedir = 0;
+
+			if (IsKeyDown(KEY_LEFT))
 			{
-				block.x--;
+				movedir = -1;
 			}
 
-			if (IsKeyPressed(KEY_RIGHT) &&
-				board.canPlace(block, block.x + 1, block.y))
+			if (IsKeyDown(KEY_RIGHT))
 			{
-				block.x++;
+				movedir = 1;
+			}
+
+			const bool firstPress =
+				IsKeyPressed(KEY_LEFT) ||
+				IsKeyPressed(KEY_RIGHT);
+
+			if (firstPress)
+			{
+				const int newX = block.x + movedir;
+
+				if (board.canPlace(block, newX, block.y))
+				{
+					block.x = newX;
+				}
+
+				moveTimer = 0.0f;
+			}
+			else if (movedir != 0)
+			{
+				moveTimer += GetFrameTime();
+				if (moveTimer >= moveInterval)
+				{
+					const int newX = block.x + movedir;
+					if (board.canPlace(block, newX, block.y))
+					{
+						block.x = newX;
+					}
+					moveTimer = 0.0f;
+				}
+			}
+			else
+			{
+				moveTimer = 0.0f;
 			}
 
 			if (IsKeyPressed(KEY_UP))
 			{
 				board.rotateCells(block);
+			}
+
+			if (IsKeyPressed(KEY_SPACE))
+			{
+				while (board.canPlace(block, block.x, block.y+1))
+				{
+					block.y++;
+				}
+				board.placeBlock(block, block.x, block.y);
+
+				if (bagCnt == 7) {
+					blockBag = Block::createBlockBag();
+					bagCnt = 0;
+				}
+
+				block = Block{ blockBag[bagCnt++] };
+
+				if (!board.canPlace(block, block.x, block.y))
+				{
+					gameOver = true;
+				}
+
+				falltimer = 0.0f;
 			}
 
 			const float currentFallInterval =
