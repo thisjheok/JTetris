@@ -48,6 +48,19 @@ int main() {
 
 	while (!WindowShouldClose())
 	{
+		if (gameOver && IsKeyPressed(KEY_R))
+		{
+			board = Board{};
+
+			blockBag = Block::createBlockBag();
+			bagIndex = 0;
+			block = createNextBlock(blockBag, bagIndex);
+			nextBlock = createNextBlock(blockBag, bagIndex);
+
+			falltimer = 0.0f;
+			moveTimer = 0.0f;
+			gameOver = false;
+		}
 		if (!gameOver) 
 		{
 			int movedir = 0;
